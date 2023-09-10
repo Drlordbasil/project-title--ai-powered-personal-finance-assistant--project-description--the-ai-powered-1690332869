@@ -1,3 +1,5 @@
+import random
+import datetime
 Sure! Here are some improvements to the Python program:
 
 1. Use meaningful variable names: Use variable names that are descriptive and indicate the purpose of the variable. For example, instead of `category`, use `expense_category`.
@@ -13,8 +15,7 @@ Sure! Here are some improvements to the Python program:
 Here's the improved program:
 
 ```python
-import datetime
-import random
+
 
 class User:
     def __init__(self, username, password):
@@ -22,16 +23,19 @@ class User:
         self.password = password
         self.accounts = []
 
+
 class Account:
     def __init__(self, account_type):
         self.account_type = account_type
         self.transactions = []
+
 
 class Transaction:
     def __init__(self, amount, expense_category, date):
         self.amount = amount
         self.expense_category = expense_category
         self.date = date
+
 
 class PersonalFinanceAssistant:
     def __init__(self):
@@ -57,7 +61,8 @@ class PersonalFinanceAssistant:
         account.transactions.append(new_transaction)
 
     def get_total_expenses(self, user):
-        expenses = [abs(transaction.amount) for account in user.accounts for transaction in account.transactions if transaction.amount < 0]
+        expenses = [abs(transaction.amount)
+                    for account in user.accounts for transaction in account.transactions if transaction.amount < 0]
         return sum(expenses)
 
     def get_expenses_by_category(self, user):
@@ -66,9 +71,11 @@ class PersonalFinanceAssistant:
             for transaction in account.transactions:
                 if transaction.amount < 0:
                     if transaction.expense_category in expenses_by_category:
-                        expenses_by_category[transaction.expense_category] += abs(transaction.amount)
+                        expenses_by_category[transaction.expense_category] += abs(
+                            transaction.amount)
                     else:
-                        expenses_by_category[transaction.expense_category] = abs(transaction.amount)
+                        expenses_by_category[transaction.expense_category] = abs(
+                            transaction.amount)
         return expenses_by_category
 
     def generate_random_savings_recommendations(self, user):
@@ -77,8 +84,10 @@ class PersonalFinanceAssistant:
         if total_expenses > 0:
             recommended_savings_percentage = random.randint(10, 30) / 100
             recommended_savings = total_expenses * recommended_savings_percentage
-            savings_recommendations.append(f"Save {recommended_savings:.2f} for emergency funds.")
-            savings_recommendations.append(f"Save {recommended_savings * 0.2:.2f} for retirement.")
+            savings_recommendations.append(
+                f"Save {recommended_savings:.2f} for emergency funds.")
+            savings_recommendations.append(
+                f"Save {recommended_savings * 0.2:.2f} for retirement.")
         return savings_recommendations
 
     def generate_bill_payment_reminders(self, user):
@@ -90,17 +99,23 @@ class PersonalFinanceAssistant:
                     due_date = transaction.date
                     days_until_due = (due_date - today).days
                     if days_until_due < 7:
-                        bill_payment_reminders.append(f"Pay {transaction.amount:.2f} due on {due_date}.")
+                        bill_payment_reminders.append(
+                            f"Pay {transaction.amount:.2f} due on {due_date}.")
         return bill_payment_reminders
 
     def generate_financial_insights(self, user):
         insights = []
         expenses_by_category = self.get_expenses_by_category(user)
-        highest_expense_category = max(expenses_by_category, key=expenses_by_category.get)
-        lowest_expense_category = min(expenses_by_category, key=expenses_by_category.get)
-        insights.append(f"Your highest expense category is {highest_expense_category}.")
-        insights.append(f"Your lowest expense category is {lowest_expense_category}.")
+        highest_expense_category = max(
+            expenses_by_category, key=expenses_by_category.get)
+        lowest_expense_category = min(
+            expenses_by_category, key=expenses_by_category.get)
+        insights.append(
+            f"Your highest expense category is {highest_expense_category}.")
+        insights.append(
+            f"Your lowest expense category is {lowest_expense_category}.")
         return insights
+
 
 # Example Usage
 assistant = PersonalFinanceAssistant()
@@ -131,7 +146,8 @@ for category, amount in expenses_by_category.items():
     print(f"{category}: {amount}")
 
 # Generate savings recommendations
-savings_recommendations = assistant.generate_random_savings_recommendations(user1)
+savings_recommendations = assistant.generate_random_savings_recommendations(
+    user1)
 print("Savings recommendations:")
 for recommendation in savings_recommendations:
     print(recommendation)
